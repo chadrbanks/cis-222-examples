@@ -1,6 +1,10 @@
 <h1>Chapter 2 Form Examples</h1>
 
 <?php
+// Methods = POST or GET
+//
+// Date = $_POST or $_GET
+
 var_dump($_POST);
 
 echo '<br><br><h3>POST</h3>';
@@ -20,6 +24,13 @@ if($_POST && $_POST['status']){
 	<input type="submit" value="Send" >
 
 </form>
+
+
+
+
+
+
+
 
 <br><br>
 
