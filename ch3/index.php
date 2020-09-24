@@ -13,4 +13,11 @@ echo '<br>';
 create_header('This is my footer.', 'div');
 
 
+
+
+
+if( !is_null($_POST) ) {
+
+}
+
 ?>
