@@ -1,5 +1,8 @@
 <?php
 
+// DB Connection
+include( 'php/db.php' );
+
 // Input
 require('php/input.php');
 

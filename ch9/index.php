@@ -34,13 +34,25 @@ while ($row = $r->fetch())
 echo '<hr />';
 
 
-$qry = 'SELECT COUNT(*) FROM `users`; ';
+$qry = 'SELECT COUNT(*) FROM `locations`; ';
 
 $r = $pdo->query( $qry );
 
 while ($row = $r->fetch())
 {
 	echo '<br><br>This table has ' . $row["COUNT(*)"] . ' rows of data.';
+}
+
+echo '<hr />';
+
+$qry = 'SELECT * FROM `locations`; ';
+
+$r = $pdo->query( $qry );
+
+while ($row = $r->fetch())
+{
+	echo '<br><br>';
+	var_dump( $row );
 }
 
 

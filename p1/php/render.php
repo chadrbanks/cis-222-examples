@@ -24,6 +24,9 @@ if( isset($_GET['page']) )
 		case 'about':
 			require('pages/about.php');
 			break;
+		case 'locations':
+			require('pages/locations.php');
+			break;
 		default:
 			require('pages/404.php');
 	}

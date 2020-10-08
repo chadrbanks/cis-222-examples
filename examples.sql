@@ -9,6 +9,8 @@
  * @version    2020.09.24
  */
 
+
+# Single line comment?
 USE crbanks1; -- Use your username!
 
 SHOW TABLES; -- See all tables in a DB
