@@ -11,13 +11,15 @@ if( isset($_GET['action']) )
 	}
 	else if( $_GET['action'] == 'add_location' )
 	{
+		$location = $_GET['location'];
+
 		$qry = "INSERT INTO `locations`
 					(`location_id`, `location_name`, `create_date`, `update_date`, `delete_date`)
 					VALUES
 					( NULL, ?, NOW(), NOW(), NULL );  ";
 
 		$stmt = $pdo->prepare( $qry );
-		$r = $stmt -> execute([$_GET['location']]);
+		$r = $stmt -> execute( [$location] );
 
 		if( $r )
 		{
