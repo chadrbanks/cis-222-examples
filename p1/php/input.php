@@ -11,19 +11,26 @@ if( isset($_GET['action']) )
 	}
 	else if( $_GET['action'] == 'add_location' )
 	{
-		$location = $_GET['location'];
+		try
+		{
+			$location = $_GET['location'];
 
-		$qry = "INSERT INTO `locations`
-					(`location_id`, `location_name`, `create_date`, `update_date`, `delete_date`)
+			$qry = "INSERT INTO `locations`
+					(`location_id`, `location_name`, `location_phone`, `create_date`, `update_date`, `delete_date`)
 					VALUES
 					( NULL, ?, NOW(), NOW(), NULL );  ";
 
-		$stmt = $pdo->prepare( $qry );
-		$r = $stmt -> execute( [$location] );
+			$stmt = $pdo->prepare($qry);
+			$r = $stmt->execute([$location]);
 
-		if( $r )
+			if ($r)
+			{
+				$_GLOBAL['location_message'] = '<div class="alert alert-success" role="alert">Location Saved!</div>';
+			}
+		}
+		catch(Exception $e)
 		{
-			$_GLOBAL['location_message'] = '<div class="alert alert-success" role="alert">Location Saved!</div>';
+			$_GLOBAL['location_message'] = '<div class="alert alert-danger" role="alert">' . $e -> getMessage(). '</div>';
 		}
 	}
 }

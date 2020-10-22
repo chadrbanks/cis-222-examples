@@ -8,9 +8,9 @@ define( 'INDEX_PATH', __DIR__ );
 include( INDEX_PATH . DIRECTORY_SEPARATOR . 'php' . DIRECTORY_SEPARATOR. 'db.php' );
 
 // Input
-require('php/input.php');
-
-// Logic
+//require('php/input.php');
+require('php/controller.php');
+$contr = new Controller( $pdo );
 
 
 // Render
