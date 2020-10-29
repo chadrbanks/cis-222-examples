@@ -52,3 +52,21 @@ VALUES
 
 -- TODO : UPDATE
 -- TODO : DELETE?
+
+
+
+
+
+CREATE TABLE Cart(
+
+  `cart_id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `cart_qty` SMALLINT UNSIGNED NOT NULL,
+  `product_id` BIGINT UNSIGNED NOT NULL,
+  `account_id` BIGINT UNSIGNED NOT NULL,
+  `cart_data` LONGTEXT,
+  `created_date` DATETIME NOT NULL,
+  `updated_date` DATETIME NOT NULL,
+  `removed_date` DATETIME NOT NULL,
+  PRIMARY KEY (`cart_id`)
+
+);
