@@ -31,6 +31,14 @@ class Controller
 			{
 				$this->processContact($pdo);
 			}
+			else if ($_GET['action'] == 'sign_in')
+			{
+				$this->processUserSignIn($pdo);
+			}
+			else if ($_GET['action'] == 'sign_up')
+			{
+				$this->processNewUser($pdo);
+			}
 		}
 	}
 
@@ -51,6 +59,38 @@ class Controller
 
 			$stmt = $pdo->prepare($qry);
 			$r = $stmt->execute([$location]);
+
+			if ($r)
+			{
+				$_GLOBAL['location_message'] = '<div class="alert alert-success" role="alert">Location Saved!</div>';
+			}
+		}
+		catch(Exception $e)
+		{
+			$_GLOBAL['location_message'] = '<div class="alert alert-danger" role="alert">' . $e -> getMessage(). '</div>';
+		}
+	}
+
+	/**
+	 * @description Process and input location into the database.
+	 * @param $pdo
+	 */
+	function processNewUser( $pdo )
+	{
+		try
+		{
+			$email = $_POST['email'];
+			$password = $_POST['password'];
+
+			//$password = encryptPassword($password);
+
+			$qry = "INSERT INTO `users`
+					(`uid`, `email`, `password`)
+					VALUES
+					( NULL, ?, ? );  ";
+
+			$stmt = $pdo->prepare($qry);
+			$r = $stmt->execute([$email, $password]);
 
 			if ($r)
 			{
