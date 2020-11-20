@@ -14,13 +14,20 @@
 class Controller
 {
 
+	private $user_model;
+	private $utils;
+
 	/**
 	 * Controller constructor.
 	 *
 	 * @param $pdo
 	 */
-	function __construct($pdo )
+	function __construct($pdo)
 	{
+		// TODO : DI?
+		$this -> utils = new Utilities();
+		$this -> user_model = new Users( $pdo );
+
 		if( isset($_GET['action']) )
 		{
 			if ( $_GET['action'] == 'add_location')
@@ -31,14 +38,6 @@ class Controller
 			{
 				$this->processContact($pdo);
 			}
-//			else if ($_GET['action'] == 'sign_in')
-//			{
-//				$this->processUserSignIn($pdo);
-//			}
-//			else if ($_GET['action'] == 'sign_up')
-//			{
-//				$this->processNewUser($pdo);
-//			}
 		}
 		else if( isset($_POST['action'] ) )
 		{
@@ -46,7 +45,35 @@ class Controller
 			{
 				$this->processNewUser($pdo);
 			}
+			else if ($_POST['action'] == 'signin')
+			{
+				$this->processSignIn($pdo);
+			}
 		}
+
+
+		if ( isset($_GET['page']) )
+		{
+			if($_GET['page'] == 'signout')
+			{
+				$this->processSignOut( );
+			}
+			else if($_GET['page'] == 'signin' || $_GET['page'] == 'signup')
+			{
+				if( isset($_SESSION['user_id']) && $_SESSION['user_id'] )
+				{
+					header('Location: https://cislinux.hfcc.edu/~crbanks1/cis222/p2/');
+				}
+			}
+		}
+	}
+
+	function processSignOut()
+	{
+		$_SESSION['user_id'] = false;
+		$_SESSION['email'] = null;
+
+		header('Location: https://cislinux.hfcc.edu/~crbanks1/cis222/p2/');
 	}
 
 	/**
@@ -78,6 +105,35 @@ class Controller
 		}
 	}
 
+
+	function processSignIn( $pdo )
+	{
+		try
+		{
+			// Gathering Data From User
+			$email = $_POST['email'];
+			$freshTypedPassword = $this -> utils -> encrypt($_POST['password'], 200, "ThisIsAUniqueS4lt");
+			$existingSavedPassword = 'ThyTwSpEm5ahQ'; // TODO : Actually query the existing password in the db
+
+			// Validations
+			if($freshTypedPassword === $existingSavedPassword)
+			{
+				$_SESSION['user_id'] = 2;
+				$_SESSION['email'] = $email;
+
+				header('Location: https://cislinux.hfcc.edu/~crbanks1/cis222/p2/');
+			}
+			else
+			{
+				throw new Exception( 'Invalid password!' );
+			}
+		}
+		catch( Exception $e )
+		{
+			$_SESSION['sign_in_error'] = '<div class="alert alert-danger" role="alert">' . $e -> getMessage(). '</div>';
+		}
+	}
+
 	/**
 	 * @description Process and input location into the database.
 	 * @param $pdo
@@ -86,10 +142,12 @@ class Controller
 	{
 		try
 		{
+			// Gathering Data From User
 			$email = $_POST['email'];
 			$password = $_POST['password'];
 			$confirm = $_POST['confirm'];
 
+			// Validations
 			if( $password !== $confirm )
 			{
 				throw new Exception( 'Passwords do not match!' );
@@ -99,18 +157,32 @@ class Controller
 				throw new Exception( 'Password is not long enough!' );
 			}
 
-			//$password = encryptPassword($password);
+			// Validate that email doesn't exist
+			$users_found = $this -> user_model -> SelectUserByEmail($email);
 
+			if( $users_found )
+			{
+				var_dump($users_found);
+				throw new Exception( 'Email already exists!' );
+			}
+
+			// Encrypt Password
+			$password = $this -> utils -> encrypt($password, 200, "ThisIsAUniqueS4lt");
+			
 			// PDO INSERT HERE
-			$insert_success = true;
+			$qry = "INSERT INTO `users`
+					(`user_id`, `email`, `password`, `create_date`, `update_date`, `delete_date`)
+					VALUES ( NULL, ?, ?, NOW(), NOW(), NULL ); ";
+
+			$stmt = $pdo->prepare($qry);
+			$insert_success = $stmt->execute([$email, $password]);
 
 			if ($insert_success)
 			{
 				$_SESSION['sign_up_success'] = '<div class="alert alert-success" role="alert">Account Saved!</div>';
-
-				//$_SESSION['current_account'] = $account_id;
 			}
-			else{
+			else
+			{
 				throw new Exception( "We failed to create your account!" );
 			}
 		}

@@ -33,6 +33,9 @@ if( isset($_GET['page']) )
 		case 'signup':
 			require('pages/signup.php');
 			break;
+		case 'signin':
+			require('pages/signin.php');
+			break;
 		default:
 			require('pages/404.php');
 	}
