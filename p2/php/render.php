@@ -21,6 +21,9 @@ if( isset($_GET['page']) )
 		case 'catalog':
 			require('pages/catalog.php');
 			break;
+		case 'pdp':
+			require('pages/pdp.php');
+			break;
 		case 'contact':
 			require('pages/contact.php');
 			break;

@@ -5,7 +5,7 @@
 include( __DIR__ . DIRECTORY_SEPARATOR . 'php' . DIRECTORY_SEPARATOR. 'db.php' );
 
 
-$qry = "SELECT * FROM `users`; ";
+$qry = "SELECT * FROM `products` ";
 
 $stmt = $pdo->prepare($qry);
 

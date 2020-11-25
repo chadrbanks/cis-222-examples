@@ -10,11 +10,25 @@ $r = $pdo->query( $qry );
 	<br><br>
 	<?php
 
+	$count = 0;
 	while ($row = $r->fetch())
 	{
-		echo '<hr>' . $row['product_name'] . ' $9.99';
-		echo '<img class="myimg" src="' . $row['product_img'] . '" >';
+		$count++;
+
+		$pid = $row['product_id'];
+		$aTag = '<a href="index.php?page=pdp&product_id=' . $pid . '" >';
+		$productName = $row['product_name'];
+
+		echo '<hr>';
+		echo $aTag . '<img class="myimg" src="' . $row['product_img'] . '" ></a>  ';
+		echo "$aTag $productName</a>";
+		echo '$' . $row['product_price'];
 		//var_dump($row);
+	}
+
+	if($count === 0)
+	{
+		?><p>Sorry, no products yet. Check back soon!</p><?php
 	}
 	?>
 </div>
