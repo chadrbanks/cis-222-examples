@@ -49,6 +49,10 @@ class Controller
 			{
 				$this->processSignIn($pdo);
 			}
+			else if ($_POST['action'] == 'add_cart')
+			{
+				$this->processAddToCart($pdo);
+			}
 		}
 
 
@@ -102,6 +106,39 @@ class Controller
 		catch(Exception $e)
 		{
 			$_GLOBAL['location_message'] = '<div class="alert alert-danger" role="alert">' . $e -> getMessage(). '</div>';
+		}
+	}
+
+	/**
+	 * @description Process and input a new item into a cart.
+	 * @param $pdo
+	 */
+	function processAddToCart( $pdo )
+	{
+		try
+		{
+			$desiredProductId = $_POST['product_id']; // TODO : THESE LINES NEED VALIDATION
+			$accountId = $_SESSION['user_id'];
+			
+			// TODO : YOU MAY NEED TO HANDLE GUEST CHECKOUT
+			
+			$qry = "INSERT INTO `Cart`
+					(`cart_id`, `cart_qty`, `product_id`, `account_id`, `cart_data`, `created_date`, `updated_date`, `removed_date`)
+					VALUES
+					( NULL, 1, ?, ?, 'Random Text', NOW(), NOW(), NOW() );  ";
+
+			$stmt = $pdo->prepare($qry);
+			$r = $stmt->execute([$desiredProductId, $accountId]);
+
+			if ($r)
+			{
+				$_GLOBAL['cart_message'] = '<div class="alert alert-success" role="alert">Item added to cart!</div>';
+			}
+		}
+		catch(Exception $e)
+		{
+			var_dump($e -> getMessage());
+			$_GLOBAL['cart_message'] = '<div class="alert alert-danger" role="alert">' . $e -> getMessage(). '</div>';
 		}
 	}
 
@@ -162,7 +199,7 @@ class Controller
 
 			if( $users_found )
 			{
-				var_dump($users_found);
+				//var_dump($users_found);
 				throw new Exception( 'Email already exists!' );
 			}
 

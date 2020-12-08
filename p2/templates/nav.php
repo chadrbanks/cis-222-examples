@@ -1,4 +1,7 @@
+<?php
 
+$itemsCurrentlyInCart = 2;// TODO : SELECT COUNT(*) FROM `Cart` WHERE `account_id` = ?
+?>
 <div class="container text-center" id="myNav" >
 	<br>
 	<h2><a href="index.php" >Example Site</a></h2>
@@ -21,6 +24,8 @@
 		<?php
 	}
 	?>
+
+	Cart: <?php echo $itemsCurrentlyInCart; ?>
 </div>
 
 

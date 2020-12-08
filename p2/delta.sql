@@ -37,7 +37,7 @@ CREATE TABLE Cart(
   `cart_data` LONGTEXT,
   `created_date` DATETIME NOT NULL,
   `updated_date` DATETIME NOT NULL,
-  `removed_date` DATETIME NOT NULL,
+  `removed_date` DATETIME DEFAULT NULL,
   PRIMARY KEY (`cart_id`)
 
 );

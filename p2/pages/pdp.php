@@ -1,8 +1,15 @@
 <?php
 
+if( isset($_GLOBAL['cart_message']) )
+{
+	echo $_GLOBAL['cart_message'];
+}
+
 $qry = "SELECT * FROM `products`  "; // THIS SHOULD USE A WHERE SO WE DO NOT HAVE TO LOOP DOWN BELOW!
 
 $r = $pdo->query( $qry );
+
+
 ?>
 <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
 	<br><br>
@@ -10,9 +17,10 @@ $r = $pdo->query( $qry );
 	<?php
 
 	$foundProduct = 0;
+	$desiredProductId = $_GET['product_id'];
 	while ($row = $r->fetch())
 	{
-		if($_GET['product_id'] == $row['product_id'])
+		if($row['product_id'] == $desiredProductId)
 		{
 			$foundProduct = 1;
 			$productName = $row['product_name'];
@@ -20,7 +28,14 @@ $r = $pdo->query( $qry );
 			echo '<h1 class="display-4">' . $productName . '</h1><br><br><hr>';
 			echo '<img class="myimg" src="' . $row['product_img'] . '" >  ';
 			echo '$' . $row['product_price'];
-			echo '<button id="myBtn" >Add To Cart</button>';
+			
+			?>
+			<form method="POST" >
+				<input type="hidden" name="action" value="add_cart" >
+				<input type="hidden" name="product_id" value="<?php echo $desiredProductId; ?>" >
+				<button >Add To Cart</button>
+			</form>
+			<?php
 		}
 	}
 
@@ -29,6 +44,10 @@ $r = $pdo->query( $qry );
 		?><h1>Sorry, that product is no longer listed!</h1><?php
 	}
 	?>
+
+
+	<br><br>
+	<button id="myBtn" >Show / Hide Nav</button>
 </div>
 
 <script>
@@ -51,6 +70,7 @@ $r = $pdo->query( $qry );
 		}
 	});
 </script>
+
 <style>
 
 	#myid{
