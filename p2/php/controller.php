@@ -132,13 +132,13 @@ class Controller
 
 			if ($r)
 			{
-				$_GLOBAL['cart_message'] = '<div class="alert alert-success" role="alert">Item added to cart!</div>';
+				$_SESSION['cart_message'] = '<div class="alert alert-success" role="alert">Item added to cart!</div>';
 			}
 		}
 		catch(Exception $e)
 		{
-			var_dump($e -> getMessage());
-			$_GLOBAL['cart_message'] = '<div class="alert alert-danger" role="alert">' . $e -> getMessage(). '</div>';
+			//var_dump($e -> getMessage());
+			$_SESSION['cart_message'] = '<div class="alert alert-danger" role="alert">' . $e -> getMessage(). '</div>';
 		}
 	}
 

@@ -1,8 +1,8 @@
 <?php
 
-if( isset($_GLOBAL['cart_message']) )
+if( isset($_SESSION['cart_message']) )
 {
-	echo $_GLOBAL['cart_message'];
+	echo $_SESSION['cart_message'];
 }
 
 $qry = "SELECT * FROM `products`  "; // THIS SHOULD USE A WHERE SO WE DO NOT HAVE TO LOOP DOWN BELOW!
