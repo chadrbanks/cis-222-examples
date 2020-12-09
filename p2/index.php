@@ -11,10 +11,11 @@ include( INDEX_PATH . DIRECTORY_SEPARATOR . 'php' . DIRECTORY_SEPARATOR. 'db.php
 include( INDEX_PATH . DIRECTORY_SEPARATOR . 'php' . DIRECTORY_SEPARATOR. 'Utilities.php' );
 // Include Users class
 include( INDEX_PATH . DIRECTORY_SEPARATOR . 'php' . DIRECTORY_SEPARATOR. 'Users.php' );
+// Include Controller class
+include( INDEX_PATH . DIRECTORY_SEPARATOR . 'php' . DIRECTORY_SEPARATOR. 'controller.php' );
 
 // Input
 //require('php/input.php');
-require('php/controller.php');
 $contr = new Controller( $pdo );
 
 
