@@ -2,6 +2,7 @@
 
 
 <p>This is a readme.</p>
+[Quick link to the site.](https://cislinux.hfcc.edu/~crbanks1/cis222/)
 
 
 <img src="https://img.theweek.in/content/dam/week/news/biz-tech/images/2019/8/19/Representational-Image-bitcoin-CC0.jpg" >
