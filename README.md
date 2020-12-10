@@ -21,32 +21,33 @@
 
 ## Grades
 
-Homework 1: 10 / 10
-Homework 2: 10 / 10
-Homework 3: 8 / 10
-Homework 4: 10 / 10
-Homework 5: 10 / 10
-Homework 6: 8 / 10
-Homework 7: 10 / 10
-Homework 8: 10 / 10
-Homework 9: 8 / 10
-HW 10 : 10 / 10
+Homework 1: 10 / 10<br />
+Homework 2: 10 / 10<br />
+Homework 3: 8 / 10<br />
+Homework 4: 10 / 10<br />
+Homework 5: 10 / 10<br />
+Homework 6: 8 / 10<br />
+Homework 7: 10 / 10<br /><br />
+Homework 8: 10 / 10<br />
+Homework 9: 8 / 10<br />
+HW 10 : 10 / 10<br />
 **Total: 89 / 100**
+<br /><br />
+Quiz 1: 10 / 10<br />
+Quiz 2: 10 / 10<br />
+Quiz 3: 10 / 10<br />
+Quiz 4: 10 / 10<br />
+Quiz 5: 10 / 10<br />
+Quiz 6: 10 / 10<br />
+Quiz 7: 10 / 10<br />
+Quiz 8: 10 / 10<br />
+Quiz 9: 10 / 10<br />
+Quiz 10: 10 / 10<br />
+**Total: 89 / 100**<br /><br />
 
-Quiz 1: 10 / 10
-Quiz 2: 10 / 10
-Quiz 3: 10 / 10
-Quiz 4: 10 / 10
-Quiz 5: 10 / 10
-Quiz 6: 10 / 10
-Quiz 7: 10 / 10
-Quiz 8: 10 / 10
-Quiz 9: 10 / 10
-Quiz 10: 10 / 10
-**Total: 89 / 100**
-
-Midterm: 80 / 100
-Final: 100 / 100
-Project: 300 / 300
-
+Midterm: 80 / 100<br />
+Final: 100 / 100<br />
+Project: 300 / 300<br />
+<br /><br />
 **Grand Total: 500 / 600**
+<br /><br />
